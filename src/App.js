@@ -4,8 +4,10 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 
+import MainLayout from "./layouts/MainLayout";
 import AboutUs from "./pages/AboutUs";
 import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
 
 export default function App() {
   const { i18n } = useTranslation();
@@ -26,9 +28,12 @@ export default function App() {
   }, [location.search, i18n, navigate, location.pathname]);
 
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/about" element={<AboutUs />} />
-    </Routes>
+    <MainLayout>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </MainLayout>
   );
 }
